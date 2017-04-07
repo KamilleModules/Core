@@ -35,13 +35,13 @@ It also provides code level options, like for instance whether or not to display
 Configuration keys
 ====================
 
-- fallbackPageController      
-    - description: The default controller used by the static router (if no uri matches)
-    - default value: Controller\Core\FallbackPageController:render
+- pageNotFoundController      
+    - description: The default controller used by the static router when no other page matches
+    - default value: Controller\Core\PageNotFoundController:render
 
 - exceptionController
     - description: The exception controller used when an exception was caught at the WebApplicationHandler 
-            level (which is btw a bad thing as it should probably be caught earlier).
+            level (which is btw a bad thing as it should probably be caught earlier)
     - default value: Controller\Core\ExceptionController:render             
 - useFileLoggerListener
     - description: Whether or not to use the default useFileLoggerListener provided by the Core module. It will write logs to the file specified with the logFile parameter             
@@ -52,6 +52,12 @@ Configuration keys
 - showExceptionTrace
     - description: Whether or not to show the exception trace in the logs. You can use the H::exceptionToString($e) method.
     - default value: true
+- useCssAutoload
+    - description: Whether or not to autoload the css files based on their existence at the location defined in the 
+    laws system (part two https://github.com/lingtalfi/laws).
+    - default value: true
+    
+    
 
 
 
@@ -59,9 +65,8 @@ Configuration keys
 Hooks
 =========
 
-- Core_addLoggerListener: add listeners to the LoggerInterface object (from the [Logger](https://github.com/lingtalfi/logger) planet), 
-                        which is then accessible via the XLog object
-- Core_feedUri2Controller: feed the array used by the StaticObjectRouter router
+- Core_addLoggerListener: add listeners to the LoggerInterface object (from the [Logger](https://github.com/lingtalfi/logger) planet), which is then accessible via the XLog object
+- Core_feedUri2Controller: add routes to the StaticObjectRouter router 
 
 
 
@@ -69,9 +74,38 @@ Hooks
 Services
 ===========
 
-- Core_webApplicationHandler: return a WebApplicationHandler instance, which has a handle(WebApplication) method.
-            This method wraps the dispatch loop, and basically starts the application instance.
-            It is therefore called right from the index.php.
+- Core_webApplicationHandler: return a WebApplicationHandler instance.
+    The WebApplicationHandler object handles any request by passing it to the WebApplication object (of the 
+    kamille framework), therefore you can and should use it right from the index.php file.
+    
+    Basically, the WebApplicationHandler wraps the WebApplication, so that it can make it available
+    to the modules land (i.e. modules can hook into the dispatch loop). 
+    It also adds its own exception handler (i.e. when an exception is uncaught at the dispatch loop level), 
+    and a pageNotFound controller, which by default displays a 404 page. 
+    
+
+
+
+
+Controllers
+===============
+
+- ExceptionController, viewId=exception
+- PageNotFoundController, viewId=pageNotFound
+
+
+
+Widget Dependencies
+=========
+- [HttpError](https://github.com/KamilleWidgets/HttpError)
+- [Exception](https://github.com/KamilleWidgets/Exception)
+
+
+
+
+
+
+
 
 
 
@@ -85,6 +119,14 @@ Others
 
 History Log
 ------------------
+    
+- 1.2.0 -- 2017-04-07
+
+    - add HttpError widget dependency
+
+- 1.1.0 -- 2017-04-06
+
+    - changed FallbackController to PageNotFoundController
     
 - 1.0.0 -- 2017-04-05
 
