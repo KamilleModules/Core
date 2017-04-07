@@ -120,6 +120,10 @@ Others
 History Log
 ------------------
     
+- 1.3.0 -- 2017-04-07
+
+    - add EarlyRouter
+    
 - 1.2.0 -- 2017-04-07
 
     - add HttpError widget dependency
