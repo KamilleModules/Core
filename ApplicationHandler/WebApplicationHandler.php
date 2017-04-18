@@ -8,6 +8,8 @@ use Bat\ObTool;
 use Core\Services\Hooks;
 use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
+use Kamille\Architecture\Router\Web\RouteRouter;
+use Kamille\Architecture\Routes\Routes;
 use Kamille\Services\XConfig;
 use Kamille\Architecture\Application\Web\WebApplication;
 use Kamille\Architecture\Request\Web\FakeHttpRequest;
@@ -47,11 +49,16 @@ class WebApplicationHandler
             Hooks::call("Core_feedEarlyRouter", $earlyRouter);
 
 
+            $routes = Routes::create();
+            Hooks::call("Core_feedRouteRouter", $routes);
+
+
             $app
                 ->addListener(RouterRequestListener::create()
                     ->addRouter($earlyRouter)
+                    ->addRouter(RouteRouter::create()->setRoutes($routes))
                     ->addRouter(StaticObjectRouter::create()
-                        ->setDefaultController(XConfig::get("Core.pageNotFoundController"))
+                        ->setDefaultController(XConfig::get("Core.fallbackController"))
                         ->setUri2Controller($uri2Controller))
 //        ->addRouter(StaticPageRouter::create()
 //            ->setStaticPageController(X::getStaticPageRouter_StaticPageController())
