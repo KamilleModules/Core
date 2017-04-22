@@ -6,10 +6,13 @@ namespace Module\Core\ApplicationHandler;
 
 use Bat\ObTool;
 use Core\Services\Hooks;
+use Core\Services\X;
 use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
+use Kamille\Architecture\Router\Web\ApplicationRoutsyRouter;
 use Kamille\Architecture\Router\Web\RouteRouter;
 use Kamille\Architecture\Routes\Routes;
+use Kamille\Mvc\HtmlPageHelper\HtmlPageHelper;
 use Kamille\Services\XConfig;
 use Kamille\Architecture\Application\Web\WebApplication;
 use Kamille\Architecture\Request\Web\FakeHttpRequest;
@@ -19,6 +22,7 @@ use Kamille\Architecture\RequestListener\Web\ResponseExecuterListener;
 use Kamille\Architecture\RequestListener\Web\RouterRequestListener;
 use Kamille\Architecture\Router\Web\StaticObjectRouter;
 use Kamille\Services\XLog;
+use Kamille\Utils\Routsy\RoutsyRouter;
 use Logger\Logger;
 use Module\Core\Architecture\Router\EarlyRouter;
 use Module\Core\Architecture\Router\ExceptionRouter;
@@ -41,25 +45,24 @@ class WebApplicationHandler
             }
 
 
-            $uri2Controller = [];
-            Hooks::call("Core_feedUri2Controller", $uri2Controller);
+//            $uri2Controller = [];
+//            Hooks::call("Core_feedUri2Controller", $uri2Controller);
 
             $earlyRouter = EarlyRouter::create();
             $earlyRouter->addRouter(ExceptionRouter::create()->setController(XConfig::get("Core.exceptionController")));
             Hooks::call("Core_feedEarlyRouter", $earlyRouter);
 
 
-            $routes = Routes::create();
-            Hooks::call("Core_feedRouteRouter", $routes);
+            HtmlPageHelper::addMeta(['charset' => "UTF-8"]);
 
 
             $app
                 ->addListener(RouterRequestListener::create()
                     ->addRouter($earlyRouter)
-                    ->addRouter(RouteRouter::create()->setRoutes($routes))
-                    ->addRouter(StaticObjectRouter::create()
-                        ->setDefaultController(XConfig::get("Core.fallbackController"))
-                        ->setUri2Controller($uri2Controller))
+                    ->addRouter(ApplicationRoutsyRouter::create())
+//                    ->addRouter(StaticObjectRouter::create()
+//                        ->setDefaultController(XConfig::get("Core.fallbackController"))
+//                        ->setUri2Controller($uri2Controller))
 //        ->addRouter(StaticPageRouter::create()
 //            ->setStaticPageController(X::getStaticPageRouter_StaticPageController())
 //            ->setUri2Page(X::getStaticPageRouter_Uri2Page()))

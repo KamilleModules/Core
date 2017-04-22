@@ -7,8 +7,8 @@ $conf = [
     ],
     "widgets" => [
         "main.httpError" => [
-            "name" => "httpError/default",
-            "conf" => [
+            "name" => "HttpError/default",
+            "tpl" => [
                 "code" => 404,
                 "text" => "Page not found",
             ],
