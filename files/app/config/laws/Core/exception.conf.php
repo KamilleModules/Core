@@ -3,7 +3,7 @@
 
 $conf = [
     "layout" => [
-        "name" => "splash/default",
+        "tpl" => "splash/default",
     ],
     "widgets" => [
         "main.exception" => [

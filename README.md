@@ -120,6 +120,10 @@ Others
 History Log
 ------------------
     
+- 1.7.0 -- 2017-04-23
+
+    - add Core_autoLawsConfig hook
+    
 - 1.6.0 -- 2017-04-22
 
     - moved laws files into Core namespace
