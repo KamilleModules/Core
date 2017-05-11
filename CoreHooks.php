@@ -4,7 +4,6 @@
 namespace Module\Core;
 
 
-use Kamille\Services\XConfig;
 
 class CoreHooks
 {
@@ -65,7 +64,7 @@ class CoreHooks
 
     protected static function Core_lazyJsInit_addCodeWrapper(\Module\Core\JsLazyCodeCollector\JsLazyCodeCollectorInterface $collector)
     {
-        if (true === XConfig::get('Core.addJqueryEndWrapper')) {
+        if (true === \Kamille\Services\XConfig::get('Core.addJqueryEndWrapper')) {
             $collector->addCodeWrapper('jquery', function ($s) {
                 $r = '$(document).ready(function () {' . PHP_EOL;
                 $r .= $s;
