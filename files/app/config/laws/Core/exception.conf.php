@@ -3,11 +3,11 @@
 
 $conf = [
     "layout" => [
-        "name" => "splash/default",
+        "tpl" => "splash/default",
     ],
     "widgets" => [
         "main.exception" => [
-            "name" => "exception/default",
+            "tpl" => "Exception/default",
             "conf" => [
                 "showMessage" => true,
                 "showTrace" => true,

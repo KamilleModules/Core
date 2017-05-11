@@ -3,11 +3,11 @@
 
 $conf = [
     "layout" => [
-        "name" => "splash/default",
+        "tpl" => "splash/default",
     ],
     "widgets" => [
         "main.httpError" => [
-            "name" => "httpError/default",
+            "tpl" => "HttpError/default",
             "conf" => [
                 "code" => 404,
                 "text" => "Page not found",

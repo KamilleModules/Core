@@ -90,8 +90,7 @@ Services
 Controllers
 ===============
 
-- ExceptionController, viewId=exception
-- PageNotFoundController, viewId=pageNotFound
+See documentation for more info
 
 
 
@@ -119,6 +118,23 @@ Others
 
 History Log
 ------------------
+    
+- 1.9.0 -- 2017-05-06
+
+    - add Core_ModalGscpResponseDefaultButtons hook
+    
+- 1.8.0 -- 2017-04-28
+
+    - add Core_QuickPdoInitializer service, and A corresponding shortcut 
+    - removed fallbackController configuration key
+    
+- 1.7.0 -- 2017-04-23
+
+    - add Core_autoLawsConfig hook
+    
+- 1.6.0 -- 2017-04-22
+
+    - moved laws files into Core namespace
     
 - 1.5.0 -- 2017-04-18
 
