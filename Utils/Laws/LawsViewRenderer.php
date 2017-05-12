@@ -13,10 +13,13 @@ use Kamille\Services\XConfig;
 use Kamille\Services\XLog;
 use Kamille\Utils\Laws\Config\LawsConfig;
 use Kamille\Utils\Laws\LawsUtilInterface;
+use Kamille\Utils\Laws\ThemeCollection\ThemeCollection;
 
 
 class LawsViewRenderer
 {
+
+
 
     /**
      * @param $viewId
