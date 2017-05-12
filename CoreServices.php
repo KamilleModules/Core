@@ -44,6 +44,12 @@ class CoreServices
         $initializer = new \Core\Framework\PersistentRowCollection\Finder\PersistentRowCollectionFinder();
         return $initializer;
     }
+
+    protected static function Core_LawsViewRenderer()
+    {
+        $r = new \Module\Core\Utils\Laws\LawsViewRenderer();
+        return $r;
+    }
 }
 
 
