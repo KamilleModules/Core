@@ -59,7 +59,9 @@ class LawsViewRenderer
         Hooks::call("Core_autoLawsConfig", $c);
 
 
-
+        /**
+         * Laws3: https://github.com/lingtalfi/laws
+         */
         if (false !== ($theme = ThemeCollection::getTheme(ApplicationParameters::get("theme")))) {
             $theme->configureView($viewId, $config);
         }
