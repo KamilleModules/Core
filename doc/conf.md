@@ -146,3 +146,18 @@ Default: the following php array
 The QuickPdo initialization settings.
 Those are used by the Module\Core\Pdo\QuickPdoInitializer 
 class, and called from the WebApplicationHandler via the A::QuickPdoInit() method.
+
+
+
+
+allowThemeControllerOverride
+==================
+2017-05-14
+
+Default: true
+
+Whether or not to allow theme to override controllers.
+
+
+
+

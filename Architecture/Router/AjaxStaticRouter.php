@@ -6,9 +6,9 @@ namespace Module\Core\Architecture\Router;
 
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
 use Kamille\Architecture\Router\Helper\RouterHelper;
-use Kamille\Architecture\Router\RouterInterface;
+use Kamille\Architecture\Router\Web\WebRouterInterface;
 
-class AjaxStaticRouter implements RouterInterface
+class AjaxStaticRouter implements WebRouterInterface
 {
 
     private $uri2Controllers;
@@ -30,7 +30,7 @@ class AjaxStaticRouter implements RouterInterface
             $uri = $request->uri(false);
             if (array_key_exists($uri, $this->uri2Controllers)) {
                 $controller = $this->uri2Controllers[$uri];
-                return RouterHelper::routerControllerToCallable($controller);
+                return $controller;
             }
         }
     }

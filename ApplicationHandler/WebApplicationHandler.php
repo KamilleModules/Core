@@ -10,6 +10,7 @@ use Core\Services\Hooks;
 use Core\Services\X;
 use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
+use Kamille\Architecture\Router\Helper\RouterHelper;
 use Kamille\Architecture\Router\Web\ApplicationRoutsyRouter;
 use Kamille\Architecture\Router\Web\RouteRouter;
 use Kamille\Architecture\Routes\Routes;
@@ -86,7 +87,26 @@ class WebApplicationHandler
 //            ->setStaticPageController(X::getStaticPageRouter_StaticPageController())
 //            ->setUri2Page(X::getStaticPageRouter_Uri2Page()))
                 )
-                ->addListener(ControllerExecuterRequestListener::create())
+                ->addListener(ControllerExecuterRequestListener::create()->setControllerRepresentationAdaptorCb(function ($v) {
+                    $p = explode(':', $v, 2);
+                    if (2 === count($p)) {
+
+                        // theme override
+                        if (true === XConfig::get("Core.allowThemeControllerOverride", true)) {
+
+                            $themeClass = 'Controller\Theme\\' . ucfirst(ApplicationParameters::get("theme"));
+                            $themeClass .= substr($p[0], 10);
+                            if (class_exists($themeClass)) {
+                                $p[0] = $themeClass;
+                            }
+                        }
+
+
+                        $o = new $p[0];
+                        return [$o, $p[1]];
+                    }
+
+                }))
                 ->addListener(ResponseExecuterListener::create());
 
 

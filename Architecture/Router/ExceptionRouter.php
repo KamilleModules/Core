@@ -5,10 +5,9 @@ namespace Module\Core\Architecture\Router;
 
 
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
-use Kamille\Architecture\Router\Helper\RouterHelper;
-use Kamille\Architecture\Router\RouterInterface;
+use Kamille\Architecture\Router\Web\WebRouterInterface;
 
-class ExceptionRouter implements RouterInterface
+class ExceptionRouter implements WebRouterInterface
 {
 
     /**
@@ -24,7 +23,7 @@ class ExceptionRouter implements RouterInterface
     public function match(HttpRequestInterface $request)
     {
         if (null !== ($exception = $request->get('exception'))) {
-            return RouterHelper::routerControllerToCallable($this->controller);
+            return $this->controller;
         }
     }
 

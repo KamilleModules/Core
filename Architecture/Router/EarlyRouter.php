@@ -5,13 +5,13 @@ namespace Module\Core\Architecture\Router;
 
 
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
-use Kamille\Architecture\Router\RouterInterface;
+use Kamille\Architecture\Router\Web\WebRouterInterface;
 
-class EarlyRouter implements RouterInterface
+class EarlyRouter implements WebRouterInterface
 {
 
     /**
-     * @var RouterInterface[]
+     * @var WebRouterInterface[]
      */
     private $routers;
 
@@ -26,7 +26,7 @@ class EarlyRouter implements RouterInterface
         return new static();
     }
 
-    public function addRouter(RouterInterface $router)
+    public function addRouter(WebRouterInterface $router)
     {
         $this->routers[] = $router;
         return $this;
