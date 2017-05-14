@@ -78,6 +78,11 @@ class CoreHooks
     {
 
     }
+
+    protected static function Core_configureRoutsyRouter(\Kamille\Utils\Routsy\RoutsyRouter $router)
+    {
+
+    }
 }
 
 

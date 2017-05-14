@@ -45,7 +45,6 @@ $conf = [
     "useFileLoggerListener" => true,
     "logFile" => $appDir . "/logs/kamille.log.txt",
     "showExceptionTrace" => false,
-    "useCssAutoload" => true,
     //--------------------------------------------
     // DATABASE
     //--------------------------------------------
@@ -58,4 +57,9 @@ $conf = [
     // JS
     //--------------------------------------------
     "addJqueryEndWrapper" => true,
+    //--------------------------------------------
+    // ROUTSY
+    //--------------------------------------------
+    "useCssAutoload" => true,
+    "uriPrefixBackoffice" => "/admin",
 ];

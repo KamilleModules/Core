@@ -24,7 +24,10 @@ use Kamille\Architecture\RequestListener\Web\ResponseExecuterListener;
 use Kamille\Architecture\RequestListener\Web\RouterRequestListener;
 use Kamille\Architecture\Router\Web\StaticObjectRouter;
 use Kamille\Services\XLog;
+use Kamille\Utils\Routsy\RouteCollection\PrefixedRouteCollection;
+use Kamille\Utils\Routsy\RouteCollection\RoutsyRouteCollection;
 use Kamille\Utils\Routsy\RoutsyRouter;
+use Kamille\Utils\Routsy\RoutsyUtil;
 use Logger\Logger;
 use Module\Core\Architecture\Router\AjaxStaticRouter;
 use Module\Core\Architecture\Router\EarlyRouter;
@@ -76,10 +79,12 @@ class WebApplicationHandler
             HtmlPageHelper::addMeta(['charset' => "UTF-8"]);
 
 
+
+
             $app
                 ->addListener(RouterRequestListener::create()
                     ->addRouter($earlyRouter)
-                    ->addRouter(ApplicationRoutsyRouter::create())
+                    ->addRouter(X::get("Core_RoutsyRouter"))
 //                    ->addRouter(StaticObjectRouter::create()
 //                        ->setDefaultController(XConfig::get("Core.fallbackController"))
 //                        ->setUri2Controller($uri2Controller))
@@ -90,7 +95,6 @@ class WebApplicationHandler
                 ->addListener(ControllerExecuterRequestListener::create()->setControllerRepresentationAdaptorCb(function ($v) {
                     $p = explode(':', $v, 2);
                     if (2 === count($p)) {
-
                         // theme override
                         if (true === XConfig::get("Core.allowThemeControllerOverride", true)) {
 
