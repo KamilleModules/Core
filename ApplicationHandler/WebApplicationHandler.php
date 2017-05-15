@@ -64,9 +64,7 @@ class WebApplicationHandler
             //--------------------------------------------
             // CONFIGURE SITE
             //--------------------------------------------
-            if (true === XConfig::get("Core.dualSite")) {
-                $this->configureDualSite($request);
-            }
+            $this->configureSite($request);
 
 
 //            $uri2Controller = [];
@@ -155,15 +153,21 @@ class WebApplicationHandler
     //--------------------------------------------
     //
     //--------------------------------------------
-    private function configureDualSite(HttpRequestInterface $request)
+    private function configureSite(HttpRequestInterface $request)
     {
-        if (true === CoreHelper::isBackoffice($request)) {
-            SessionUser::$key = 'backUser';
-            ApplicationParameters::set("theme", XConfig::get("Core.themeBack"));
+        if (true === XConfig::get("Core.dualSite")) {
+            if (true === CoreHelper::isBackoffice($request)) {
+                $request->set("siteType", "dual.back");
+                SessionUser::$key = 'backUser';
+                ApplicationParameters::set("theme", XConfig::get("Core.themeBack"));
+            } else {
+                $request->set("siteType", "dual.front");
+                SessionUser::$key = 'frontUser';
+                ApplicationParameters::set("theme", XConfig::get("Core.themeFront"));
+            }
+        } else {
+            $request->set("siteType", "single");
         }
-        else{
-            SessionUser::$key = 'frontUser';
-            ApplicationParameters::set("theme", XConfig::get("Core.themeFront"));
-        }
+
     }
 }
