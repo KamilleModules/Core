@@ -12,7 +12,7 @@ class CoreHelper
 
     public static function isBackoffice(HttpRequestInterface $request)
     {
-        $backUri = XConfig::get("Core.uriNamespaceBackoffice");
+        $backUri = XConfig::get("Core.uriPrefixBackoffice");
         $uri = $request->uri(false);
         return (
             $backUri === $uri ||
