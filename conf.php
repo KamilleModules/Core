@@ -70,5 +70,7 @@ $conf = [
      */
     "dualSite" => true,
     "uriPrefixBackoffice" => "/admin",
+    "themeBack" => "nullosAdmin",
+    "themeFront" => ApplicationParameters::get("theme"),
 
 ];
