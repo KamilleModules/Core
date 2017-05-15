@@ -61,5 +61,14 @@ $conf = [
     // ROUTSY
     //--------------------------------------------
     "useCssAutoload" => true,
+    //--------------------------------------------
+    // DUAL SITE
+    //--------------------------------------------
+    /**
+     * A dual site is when you have a frontoffice AND a backoffice handled by the same application code.
+     * If it's not dual, then you only have a front office, or a backoffice, but not both.
+     */
+    "dualSite" => true,
     "uriPrefixBackoffice" => "/admin",
+
 ];

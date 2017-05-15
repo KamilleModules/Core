@@ -4,6 +4,7 @@
 namespace Module\Core\ApplicationHandler;
 
 
+use Authenticate\SessionUser\SessionUser;
 use Bat\ObTool;
 use Core\Services\A;
 use Core\Services\Hooks;
@@ -32,6 +33,7 @@ use Logger\Logger;
 use Module\Core\Architecture\Router\AjaxStaticRouter;
 use Module\Core\Architecture\Router\EarlyRouter;
 use Module\Core\Architecture\Router\ExceptionRouter;
+use Module\Core\Helper\CoreHelper;
 use QuickPdo\QuickPdo;
 
 class WebApplicationHandler
@@ -54,9 +56,16 @@ class WebApplicationHandler
                 XLog::debug("[Core module] - WebApplicationHandler.handle with uri: " . $request->uri());
             }
 
-
             if (true === XConfig::get("Core.useQuickPdo")) {
                 A::quickPdoInit();
+            }
+
+
+            //--------------------------------------------
+            // CONFIGURE SITE
+            //--------------------------------------------
+            if (true === XConfig::get("Core.dualSite")) {
+                $this->configureDualSite($request);
             }
 
 
@@ -77,8 +86,6 @@ class WebApplicationHandler
 
 
             HtmlPageHelper::addMeta(['charset' => "UTF-8"]);
-
-
 
 
             $app
@@ -145,4 +152,18 @@ class WebApplicationHandler
     }
 
 
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+    private function configureDualSite(HttpRequestInterface $request)
+    {
+        if (true === CoreHelper::isBackoffice($request)) {
+            SessionUser::$key = 'backUser';
+            ApplicationParameters::set("theme", XConfig::get("Core.themeBack"));
+        }
+        else{
+            SessionUser::$key = 'frontUser';
+            ApplicationParameters::set("theme", XConfig::get("Core.themeFront"));
+        }
+    }
 }
