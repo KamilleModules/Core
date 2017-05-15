@@ -11,10 +11,6 @@ use Core\Services\Hooks;
 use Core\Services\X;
 use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
-use Kamille\Architecture\Router\Helper\RouterHelper;
-use Kamille\Architecture\Router\Web\ApplicationRoutsyRouter;
-use Kamille\Architecture\Router\Web\RouteRouter;
-use Kamille\Architecture\Routes\Routes;
 use Kamille\Mvc\HtmlPageHelper\HtmlPageHelper;
 use Kamille\Services\XConfig;
 use Kamille\Architecture\Application\Web\WebApplication;
@@ -23,18 +19,13 @@ use Kamille\Architecture\Request\Web\HttpRequest;
 use Kamille\Architecture\RequestListener\Web\ControllerExecuterRequestListener;
 use Kamille\Architecture\RequestListener\Web\ResponseExecuterListener;
 use Kamille\Architecture\RequestListener\Web\RouterRequestListener;
-use Kamille\Architecture\Router\Web\StaticObjectRouter;
 use Kamille\Services\XLog;
-use Kamille\Utils\Routsy\RouteCollection\PrefixedRouteCollection;
-use Kamille\Utils\Routsy\RouteCollection\RoutsyRouteCollection;
-use Kamille\Utils\Routsy\RoutsyRouter;
-use Kamille\Utils\Routsy\RoutsyUtil;
 use Logger\Logger;
 use Module\Core\Architecture\Router\AjaxStaticRouter;
 use Module\Core\Architecture\Router\EarlyRouter;
 use Module\Core\Architecture\Router\ExceptionRouter;
 use Module\Core\Helper\CoreHelper;
-use QuickPdo\QuickPdo;
+
 
 class WebApplicationHandler
 {
@@ -98,6 +89,7 @@ class WebApplicationHandler
 //            ->setUri2Page(X::getStaticPageRouter_Uri2Page()))
                 )
                 ->addListener(ControllerExecuterRequestListener::create()->setControllerRepresentationAdaptorCb(function ($v) {
+
                     $p = explode(':', $v, 2);
                     if (2 === count($p)) {
                         // theme override
