@@ -36,7 +36,7 @@ class LawsViewRenderer
         // SEND DEBUG MESSAGE TO THE LOGS
         //--------------------------------------------
         if (true === ApplicationParameters::get('debug')) {
-            XLog::debug("[Controller " . get_called_class() . "] - renderByViewId with viewId $viewId");
+            XLog::debug("[Core module] - LawsViewRenderer.renderByViewId with viewId $viewId");
         }
 
 

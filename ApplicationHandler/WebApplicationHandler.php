@@ -89,7 +89,6 @@ class WebApplicationHandler
 //            ->setUri2Page(X::getStaticPageRouter_Uri2Page()))
                 )
                 ->addListener(ControllerExecuterRequestListener::create()->setControllerRepresentationAdaptorCb(function ($v) {
-
                     $p = explode(':', $v, 2);
                     if (2 === count($p)) {
                         // theme override
@@ -99,6 +98,9 @@ class WebApplicationHandler
                             $themeClass .= substr($p[0], 10);
                             if (class_exists($themeClass)) {
                                 $p[0] = $themeClass;
+                                if(true === ApplicationParameters::get("debug")){
+                                    XLog::debug("[Core module] - WebApplicationHandler: controller overridden by theme: $themeClass");
+                                }
                             }
                         }
 
