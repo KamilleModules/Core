@@ -39,6 +39,10 @@ class CoreHooks
 
     }
 
+    protected static function Core_onSiteConfigured(\Kamille\Architecture\Request\Web\HttpRequestInterface $request){
+
+    }
+
     /**
      * @param data , array:
      *      - 0: controller instance

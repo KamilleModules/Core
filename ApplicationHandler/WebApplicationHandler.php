@@ -56,6 +56,10 @@ class WebApplicationHandler
             // CONFIGURE SITE
             //--------------------------------------------
             $this->configureSite($request);
+            Hooks::call("Core_onSiteConfigured", $request);
+
+
+
 
 
 //            $uri2Controller = [];
