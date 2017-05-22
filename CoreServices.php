@@ -67,6 +67,13 @@ class CoreServices
         \Core\Services\Hooks::call("Core_configureRoutsyRouter", $routsyRouter);
         return $routsyRouter;
     }
+
+    protected static function Core_TabathaCache()
+    {
+        $r = new \TabathaCache\Cache\TabathaCache();
+        return $r;
+    }
+
 }
 
 
