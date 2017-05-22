@@ -20,9 +20,10 @@ class CoreServices
     {
         $layoutProxy = \Kamille\Mvc\LayoutProxy\LawsLayoutProxy::create();
         \Core\Services\Hooks::call("Core_addLawsUtilProxyDecorators", $layoutProxy);
-        return \Kamille\Utils\Laws\LawsUtil::create()
+        $util = \Kamille\Utils\Laws\LawsUtil::create()
             ->setLawsLayoutProxy($layoutProxy);
-
+        \Core\Services\Hooks::call("Core_configureLawsUtil", $util);
+        return $util;
     }
 
 

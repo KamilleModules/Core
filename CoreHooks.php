@@ -4,7 +4,6 @@
 namespace Module\Core;
 
 
-
 class CoreHooks
 {
 
@@ -12,6 +11,11 @@ class CoreHooks
 //    {
 //
 //    }
+
+    protected static function Core_configureLawsUtil(\Kamille\Utils\Laws\LawsUtil $util)
+    {
+
+    }
 
     protected static function Core_addLoggerListener(\Logger\LoggerInterface $logger)
     {
@@ -39,7 +43,8 @@ class CoreHooks
 
     }
 
-    protected static function Core_onSiteConfigured(\Kamille\Architecture\Request\Web\HttpRequestInterface $request){
+    protected static function Core_onSiteConfigured(\Kamille\Architecture\Request\Web\HttpRequestInterface $request)
+    {
 
     }
 
