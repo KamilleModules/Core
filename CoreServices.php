@@ -71,6 +71,7 @@ class CoreServices
     protected static function Core_TabathaCache()
     {
         $r = new \TabathaCache\Cache\TabathaCache();
+        $r->setDir(\Kamille\Architecture\ApplicationParameters\ApplicationParameters::get("app_dir") . "/cache");
         return $r;
     }
 
