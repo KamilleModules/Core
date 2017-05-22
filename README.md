@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.10.0 -- 2017-05-22
+
+    - add Core_configureLawsUtil hook
+    
 - 1.9.0 -- 2017-05-06
 
     - add Core_ModalGscpResponseDefaultButtons hook
