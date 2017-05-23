@@ -53,6 +53,7 @@ $conf = [
     "dbLogFile" => $appDir . "/logs/kamille.sql.log.txt",
     "useQuickPdo" => true,
     "quickPdoConfig" => $quickPdoConf,
+    "useTabathaDb" => true,
     //--------------------------------------------
     // JS
     //--------------------------------------------
