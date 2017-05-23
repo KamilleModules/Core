@@ -10,11 +10,16 @@ use TabathaCache\Cache\TabathaCache;
 class DebugTabathaCache extends TabathaCache
 {
 
-    public function get($cacheId, callable $generateCallback, $deleteIds)
+    protected function onCacheCreate($cacheId, array $deleteIds) // override me
     {
-        XLog::debug("[Core module] - DebugTabathaCache: get cache $cacheId");
-        return parent::get($cacheId, $generateCallback, $deleteIds);
+        XLog::debug("[Core module] - DebugTabathaCache: cache create: $cacheId, deleteIds: " . implode(', ', $deleteIds));
     }
+
+    protected function onCacheHit($cacheId, array $deleteIds) // override me
+    {
+        XLog::debug("[Core module] - DebugTabathaCache: cache hit: $cacheId, deleteIds: " . implode(', ', $deleteIds));
+    }
+
 
     public function clean($deleteIds)
     {

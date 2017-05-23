@@ -70,13 +70,15 @@ class CoreServices
 
     protected static function Core_TabathaCache()
     {
-//        $r = new \TabathaCache\Cache\TabathaCache();
-        $r = new \Module\Core\Planets\TabathaCache\DebugTabathaCache(); // temporary, will be commented in production
+        if (true === \Kamille\Architecture\ApplicationParameters\ApplicationParameters::get("debug")) {
+            $r = new \Module\Core\Planets\TabathaCache\DebugTabathaCache();
+        } else {
+            $r = new \TabathaCache\Cache\TabathaCache();
+        }
 
         $r->setDir(\Kamille\Architecture\ApplicationParameters\ApplicationParameters::get("app_dir") . "/cache");
         return $r;
     }
-
 }
 
 

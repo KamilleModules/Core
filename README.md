@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.11.0 -- 2017-05-23
+
+    - add Core_TabathaCache service
+    
 - 1.10.0 -- 2017-05-22
 
     - add Core_configureLawsUtil hook
