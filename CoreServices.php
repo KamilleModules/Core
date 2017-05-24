@@ -76,7 +76,7 @@ class CoreServices
             $r = new \TabathaCache\Cache\TabathaCache();
         }
 
-        $r->setDefaultForceGenerate(\Kamille\Services\XConfig::get("Core.enableTabathaCache"));
+        $r->setDefaultForceGenerate((false === \Kamille\Services\XConfig::get("Core.enableTabathaCache")));
 
         $r->setDir(\Kamille\Architecture\ApplicationParameters\ApplicationParameters::get("app_dir") . "/cache");
         return $r;
