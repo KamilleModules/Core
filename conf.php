@@ -53,7 +53,16 @@ $conf = [
     "dbLogFile" => $appDir . "/logs/kamille.sql.log.txt",
     "useQuickPdo" => true,
     "quickPdoConfig" => $quickPdoConf,
+    //--------------------------------------------
+    // TABATHA
+    //--------------------------------------------
+    /**
+     * Hook into QuickPdo instance of the app and clean the tabatha cache using tabathaDb strategy
+     * (https://github.com/lingtalfi/TabathaCache#tabatha-db).
+     *
+     */
     "useTabathaDb" => true,
+    "enableTabathaCache" => false,
     //--------------------------------------------
     // JS
     //--------------------------------------------
