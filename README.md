@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.12.0 -- 2017-05-26
+
+    - ServiceController's uri now starts with the module prefix
+    
 - 1.11.0 -- 2017-05-23
 
     - add Core_TabathaCache service

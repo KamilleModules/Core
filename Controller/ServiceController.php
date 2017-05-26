@@ -29,7 +29,7 @@ class ServiceController extends ApplicationController
             $p = explode('/', $serviceId, 3);
             if (3 === count($p)) {
 
-                $___type___ = $p[0];
+                $___type___ = $p[1];
                 if (in_array($___type___, [
                     'json',
                     'gscp',
