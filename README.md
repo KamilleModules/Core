@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.13.0 -- 2017-05-29
+
+    - add Core_umail service
+    
 - 1.12.0 -- 2017-05-26
 
     - ServiceController's uri now starts with the module prefix
