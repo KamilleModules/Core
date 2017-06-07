@@ -20,6 +20,9 @@ use Kamille\Architecture\RequestListener\Web\ControllerExecuterRequestListener;
 use Kamille\Architecture\RequestListener\Web\ResponseExecuterListener;
 use Kamille\Architecture\RequestListener\Web\RouterRequestListener;
 use Kamille\Services\XLog;
+use Kamille\Utils\Routsy\LinkGenerator\ApplicationLinkGenerator;
+use Kamille\Utils\Routsy\LinkGenerator\LinkGenerator;
+use Kamille\Utils\Routsy\RoutsyRouter;
 use Logger\Logger;
 use Module\Core\Architecture\Router\AjaxStaticRouter;
 use Module\Core\Architecture\Router\EarlyRouter;
@@ -47,6 +50,9 @@ class WebApplicationHandler
                 XLog::debug("[Core module] - WebApplicationHandler.handle with uri: " . $request->uri());
             }
 
+            //--------------------------------------------
+            // INITIALIZE PDO
+            //--------------------------------------------
             if (true === XConfig::get("Core.useQuickPdo")) {
                 A::quickPdoInit();
             }
@@ -57,9 +63,6 @@ class WebApplicationHandler
             //--------------------------------------------
             $this->configureSite($request);
             Hooks::call("Core_onSiteConfigured", $request);
-
-
-
 
 
 //            $uri2Controller = [];

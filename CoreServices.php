@@ -7,16 +7,6 @@ namespace Module\Core;
 class CoreServices
 {
 
-    protected static function Core_umail()
-    {
-        return \Kamille\Utils\Umail\KamilleUmail::create();
-    }
-
-    protected static function Core_webApplicationHandler()
-    {
-        return new \Module\Core\ApplicationHandler\WebApplicationHandler();
-    }
-
     /**
      * This service will always return an instance of the LawsUtil object.
      * Happy coding!
@@ -31,6 +21,13 @@ class CoreServices
         return $util;
     }
 
+    protected static function Core_LawsViewRenderer()
+    {
+        $r = new \Module\Core\Utils\Laws\LawsViewRenderer();
+        return $r;
+    }
+
+
 
     protected static function Core_lazyJsInit()
     {
@@ -39,11 +36,17 @@ class CoreServices
         return $collector;
     }
 
-    protected static function Core_QuickPdoInitializer()
+
+    protected static function Core_LinkGenerator()
     {
-        $initializer = new \Module\Core\Pdo\QuickPdoInitializer();
-        return $initializer;
+        /**
+         * @var $routsyRouter \Kamille\Utils\Routsy\RoutsyRouter
+         */
+        $routsyRouter = \Core\Services\X::get("Core_RoutsyRouter");
+        $routes = $routsyRouter->getRoutes();
+        return \Kamille\Utils\Routsy\LinkGenerator\LinkGenerator::create()->setRoutes($routes);
     }
+
 
     protected static function Core_PersistentRowCollectionFinder()
     {
@@ -51,11 +54,13 @@ class CoreServices
         return $initializer;
     }
 
-    protected static function Core_LawsViewRenderer()
+
+    protected static function Core_QuickPdoInitializer()
     {
-        $r = new \Module\Core\Utils\Laws\LawsViewRenderer();
-        return $r;
+        $initializer = new \Module\Core\Pdo\QuickPdoInitializer();
+        return $initializer;
     }
+
 
     protected static function Core_RoutsyRouter()
     {
@@ -86,6 +91,21 @@ class CoreServices
         $r->setDir(\Kamille\Architecture\ApplicationParameters\ApplicationParameters::get("app_dir") . "/cache/tabatha");
         return $r;
     }
+
+    protected static function Core_umail()
+    {
+        return \Kamille\Utils\Umail\KamilleUmail::create();
+    }
+
+    protected static function Core_webApplicationHandler()
+    {
+        return new \Module\Core\ApplicationHandler\WebApplicationHandler();
+    }
+
+
+
+
+
 }
 
 

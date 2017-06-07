@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.14.0 -- 2017-06-07
+
+    - add Core_LinkGenerator service
+    
 - 1.13.0 -- 2017-05-29
 
     - add Core_umail service

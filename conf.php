@@ -79,6 +79,7 @@ $conf = [
      * If it's not dual, then you only have a front office, or a backoffice, but not both.
      */
     "dualSite" => true,
+    "defaultProtocol" => 'http', // http|https
     "uriPrefixBackoffice" => "/admin",
     "themeBack" => "nullosAdmin",
     "themeFront" => ApplicationParameters::get("theme"),

@@ -10,7 +10,7 @@ One of the coolest feature provided by the Core module is the ability to turn a 
 A dual website is composed of two websites: the front and the back (aka admin aka backoffice).
 
 
-This feature is kool because we uri leading to the admin is virtual, and so we can change it on the fly,
+This feature is kool because the uri leading to the admin is virtual, and so we can change it on the fly,
 hence potentially helping creating a better security model.
 
 
@@ -34,7 +34,7 @@ But then there are ajax services which possibly display some visual things.
 For instance:
 
 - the DataTable module provides the whole datatable via ajax
-- the GscpModalResponse provides uses a modal content widget
+- the GscpModalResponse provides uses a modal content widget via ajax
 
 
 When something displays a visual thing, assuming we use MVC, we need to know the theme.
@@ -66,6 +66,35 @@ sorry, that's the flaw of this design), one in the back and one in the front.
 
 
 Get it?
+
+
+
+
+
+Implementation details
+=========================
+2017-06-07
+
+The switching mechanism is created in X::Core_RoutsyRouter by the Core module.
+Basically, thanks to the RoutsyRouter capabilities, when a route match, we are able to set the theme,
+depending on which file the route was attached to.
+
+
+Absolute urls?
+------------------
+Now since we are using a dual site, the host name is the same (by definition).
+But what about the protocol: http or https?
+
+I believe in the end the user (writing the link) should always be able
+to decide the protocol.
+However, most of the time your whole website will either be https, or it will not,
+so it might be cool if we could just have a default value.
+
+So, we provide the defaultProtocol configuration key for that.
+
+
+
+
 
 
 
