@@ -92,6 +92,11 @@ class CoreHooks
     {
 
     }
+
+
+    protected static function Core_widgetInstanceDecorator(\Kamille\Mvc\Widget\WidgetInterface $widget){
+        $widget->setTemplate("Core/widget-error");
+    }
 }
 
 

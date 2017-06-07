@@ -15,6 +15,7 @@ use Kamille\Utils\Laws\Config\LawsConfig;
 use Kamille\Utils\Laws\LawsUtil;
 use Kamille\Utils\Laws\LawsUtilInterface;
 use Kamille\Utils\Laws\ThemeCollection\ThemeCollection;
+use Module\Core\Mvc\WidgetInstanceDecorator\WidgetInstanceDecorator;
 
 
 class LawsViewRenderer
@@ -47,6 +48,15 @@ class LawsViewRenderer
             $options['autoloadCss'] = XConfig::get("Core.useCssAutoload", false);
         }
         $options['widgetClass'] = 'Core\Mvc\Widget\ApplicationWidget';
+
+
+
+        //--------------------------------------------
+        // WIDGET INSTANCE DECORATION
+        // see widget-instance-decorator.md document for more info
+        //--------------------------------------------
+        $options['widgetInstanceDecorator'] = WidgetInstanceDecorator::create();
+
 
 
         //--------------------------------------------
