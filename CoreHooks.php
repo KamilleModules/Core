@@ -43,6 +43,11 @@ class CoreHooks
 
     }
 
+
+    protected static function Core_feedOnTheFlyFormProvider(\OnTheFlyForm\Provider\OnTheFlyFormProviderInterface $provider){
+
+    }
+
     protected static function Core_onSiteConfigured(\Kamille\Architecture\Request\Web\HttpRequestInterface $request)
     {
 

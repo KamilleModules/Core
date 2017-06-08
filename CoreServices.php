@@ -28,7 +28,6 @@ class CoreServices
     }
 
 
-
     protected static function Core_lazyJsInit()
     {
         $collector = \Module\Core\JsLazyCodeCollector\JsLazyCodeCollector::create();
@@ -45,6 +44,14 @@ class CoreServices
         $routsyRouter = \Core\Services\X::get("Core_RoutsyRouter");
         $routes = $routsyRouter->getRoutes();
         return \Kamille\Utils\Routsy\LinkGenerator\LinkGenerator::create()->setRoutes($routes);
+    }
+
+
+    protected static function Core_OnTheFlyFormProvider()
+    {
+        $provider = \OnTheFlyForm\Provider\OnTheFlyFormProvider::create();
+        \Core\Services\Hooks::call("Core_feedOnTheFlyFormProvider", $provider);
+        return $provider;
     }
 
 
@@ -101,9 +108,6 @@ class CoreServices
     {
         return new \Module\Core\ApplicationHandler\WebApplicationHandler();
     }
-
-
-
 
 
 }

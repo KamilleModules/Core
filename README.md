@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.15.0 -- 2017-06-08
+
+    - add Core_OnTheFlyFormProvider service
+    
 - 1.14.0 -- 2017-06-07
 
     - add Core_LinkGenerator service
