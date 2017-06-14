@@ -24,6 +24,8 @@ class CoreHooks
             $logger->addListener(\Logger\Listener\FileLoggerListener::create()
                 ->setFormatter(\Logger\Formatter\TagFormatter::create())
                 ->setIdentifiers(null)
+                ->removeIdentifier("sql.log")
+                ->removeIdentifier("tabatha")
                 ->setPath($f));
         }
 
