@@ -21,6 +21,13 @@ class CoreServices
         return $util;
     }
 
+
+    protected static function Core_Localyser()
+    {
+        $o = \Localys\Localyser\Localyser::create();
+        return $o;
+    }
+
     protected static function Core_LawsViewRenderer()
     {
         $r = new \Module\Core\Utils\Laws\LawsViewRenderer();

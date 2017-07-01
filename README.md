@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.16.0 -- 2017-07-01
+
+    - add Core_Localyser service
+    
 - 1.15.0 -- 2017-06-08
 
     - add Core_OnTheFlyFormProvider service
