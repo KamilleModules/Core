@@ -4,6 +4,8 @@
 namespace Module\Core;
 
 
+use Core\Services\Hooks;
+
 class CoreServices
 {
 
@@ -107,6 +109,13 @@ class CoreServices
     protected static function Core_webApplicationHandler()
     {
         return new \Module\Core\ApplicationHandler\WebApplicationHandler();
+    }
+
+    protected static function Core_ListModifierCircle()
+    {
+        $c = new \ListModifier\Circle\ListModifierCircle();
+        Hooks::call("Core_feedListModifierCircle", $c);
+        return $c;
     }
 
 

@@ -4,6 +4,7 @@
 namespace Module\Core\Pdo;
 
 use Core\Services\A;
+use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Services\XConfig;
 use Kamille\Services\XLog;
 use QuickPdo\QuickPdo;
@@ -98,6 +99,11 @@ class QuickPdoInitializer
                         if (true === $isPk) {
                             $deleteId .= '.' . implode('.', $pks);
                         }
+                    }
+
+
+                    if (true === ApplicationParameters::get("debug")) {
+                        XLog::log("Tabatha-deleteId: $deleteId", "testId");
                     }
                     A::cache()->clean($deleteId);
                 }
