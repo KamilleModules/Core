@@ -46,7 +46,8 @@ class CoreHooks
     }
 
 
-    protected static function Core_feedOnTheFlyFormProvider(\OnTheFlyForm\Provider\OnTheFlyFormProviderInterface $provider){
+    protected static function Core_feedOnTheFlyFormProvider(\OnTheFlyForm\Provider\OnTheFlyFormProviderInterface $provider)
+    {
 
     }
 
@@ -101,8 +102,13 @@ class CoreHooks
     }
 
 
-    protected static function Core_widgetInstanceDecorator(\Kamille\Mvc\Widget\WidgetInterface $widget){
+    protected static function Core_widgetInstanceDecorator(\Kamille\Mvc\Widget\WidgetInterface $widget)
+    {
         $widget->setTemplate("Core/widget-error");
+    }
+
+    protected static function Core_feedListModifierCircle(\ListModifier\Circle\ListModifierCircle $circle)
+    {
     }
 }
 
