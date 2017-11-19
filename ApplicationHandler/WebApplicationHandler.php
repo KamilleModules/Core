@@ -5,11 +5,14 @@ namespace Module\Core\ApplicationHandler;
 
 
 use Authenticate\SessionUser\SessionUser;
+use Bat\LocalHostTool;
 use Bat\ObTool;
+use Chronos\Chronos;
 use Core\Services\A;
 use Core\Services\Hooks;
 use Core\Services\X;
 use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
+use Kamille\Architecture\Environment\Web\Environment;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
 use Kamille\Mvc\HtmlPageHelper\HtmlPageHelper;
 use Kamille\Services\XConfig;
@@ -33,8 +36,10 @@ use Module\Core\Helper\CoreHelper;
 class WebApplicationHandler
 {
 
+
     public function handle(WebApplication $app)
     {
+        Chronos::point("page.perf");
         try {
 
             $request = HttpRequest::create();
@@ -45,6 +50,7 @@ class WebApplicationHandler
             $logger = Logger::create();
             Hooks::call("Core_addLoggerListener", $logger);
             XLog::setLogger($logger); // now XLog is initialized for the rest of the application :)
+
 
             if (true === ApplicationParameters::get('debug')) {
                 XLog::debug("[Core module] - WebApplicationHandler.handle with uri: " . $request->uri());
@@ -96,6 +102,9 @@ class WebApplicationHandler
 //            ->setUri2Page(X::getStaticPageRouter_Uri2Page()))
                 )
                 ->addListener(ControllerExecuterRequestListener::create()->setControllerRepresentationAdaptorCb(function ($v) {
+
+                    Hooks::call("Core_Controller_onControllerStringReceived", $v);
+
                     $p = explode(':', $v, 2);
                     if (2 === count($p)) {
                         // theme override
@@ -105,7 +114,7 @@ class WebApplicationHandler
                             $themeClass .= substr($p[0], 10);
                             if (class_exists($themeClass)) {
                                 $p[0] = $themeClass;
-                                if(true === ApplicationParameters::get("debug")){
+                                if (true === ApplicationParameters::get("debug")) {
                                     XLog::debug("[Core module] - WebApplicationHandler: controller overridden by theme: $themeClass");
                                 }
                             }
@@ -147,6 +156,17 @@ class WebApplicationHandler
                 ->set("oldRequest", $oldRequest)
                 ->set("exception", $e);
             $app->handleRequest($request);
+        }
+
+        if (true) {
+            // assuming xlog was successfully created
+            $perf = Chronos::point("page.perf");
+            $msg = PHP_SAPI . "-";
+            if (array_key_exists("REQUEST_URI", $_SERVER)) {
+                $msg .= $_SERVER['REQUEST_URI'];
+            }
+            $msg .= "--" . number_format($perf[0],3) . "--" . $perf[1];
+            XLog::log("$msg", "page.perf");
         }
     }
 
