@@ -30,6 +30,7 @@ use Logger\Logger;
 use Module\Core\Architecture\Router\AjaxStaticRouter;
 use Module\Core\Architecture\Router\EarlyRouter;
 use Module\Core\Architecture\Router\ExceptionRouter;
+use Module\Core\Architecture\Router\MaintenanceRouter;
 use Module\Core\Helper\CoreHelper;
 
 
@@ -67,6 +68,8 @@ class WebApplicationHandler
             //--------------------------------------------
             // CONFIGURE SITE
             //--------------------------------------------
+            // select front/back
+            // decide if it's maintenance or not
             $this->configureSite($request);
             Hooks::call("Core_onSiteConfigured", $request);
 
@@ -82,6 +85,7 @@ class WebApplicationHandler
 
 
             $earlyRouter = EarlyRouter::create();
+            $earlyRouter->addRouter(MaintenanceRouter::create()->setController(XConfig::get("Core.maintenanceController")));
             $earlyRouter->addRouter(ExceptionRouter::create()->setController(XConfig::get("Core.exceptionController")));
             $earlyRouter->addRouter($ajaxRouter);
             Hooks::call("Core_feedEarlyRouter", $earlyRouter);
@@ -101,11 +105,11 @@ class WebApplicationHandler
 //            ->setStaticPageController(X::getStaticPageRouter_StaticPageController())
 //            ->setUri2Page(X::getStaticPageRouter_Uri2Page()))
                 )
-                ->addListener(ControllerExecuterRequestListener::create()->setControllerRepresentationAdaptorCb(function ($v) {
+                ->addListener(ControllerExecuterRequestListener::create()->setControllerRepresentationAdaptorCb(function ($controllerString) {
 
-                    Hooks::call("Core_Controller_onControllerStringReceived", $v);
+                    Hooks::call("Core_Controller_onControllerStringReceived", $controllerString);
 
-                    $p = explode(':', $v, 2);
+                    $p = explode(':', $controllerString, 2);
                     if (2 === count($p)) {
                         // theme override
                         if (true === XConfig::get("Core.allowThemeControllerOverride", true)) {
@@ -165,7 +169,7 @@ class WebApplicationHandler
             if (array_key_exists("REQUEST_URI", $_SERVER)) {
                 $msg .= $_SERVER['REQUEST_URI'];
             }
-            $msg .= "--" . number_format($perf[0],3) . "--" . $perf[1];
+            $msg .= "--" . number_format($perf[0], 3) . "--" . $perf[1];
             XLog::log("$msg", "page.perf");
         }
     }

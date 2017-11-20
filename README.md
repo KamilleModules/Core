@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.17.0 -- 2017-11-20
+
+    - add maintenance handling
+    
 - 1.16.0 -- 2017-07-01
 
     - add Core_Localyser service
