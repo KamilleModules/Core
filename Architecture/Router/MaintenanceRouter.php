@@ -7,6 +7,7 @@ namespace Module\Core\Architecture\Router;
 use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
 use Kamille\Architecture\Router\Web\WebRouterInterface;
+use Kamille\Services\XConfig;
 
 class MaintenanceRouter implements WebRouterInterface
 {
@@ -23,7 +24,7 @@ class MaintenanceRouter implements WebRouterInterface
 
     public function match(HttpRequestInterface $request)
     {
-        if (true === ApplicationParameters::get("maintenance") &&
+        if (true === XConfig::get("Core.isInMaintenance") &&
             (
                 "single" === $request->get("siteType") ||
                 "dual.front" === $request->get("siteType")
