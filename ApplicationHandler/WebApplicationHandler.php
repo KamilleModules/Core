@@ -138,6 +138,7 @@ class WebApplicationHandler
 
         } catch (\Exception $e) {
 
+
             /**
              * @var $oldRequest HttpRequestInterface
              */

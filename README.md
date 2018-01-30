@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.18.0 -- 2018-01-30
+
+    - enhance QuickPdoInitializer, now delegates via Core_onQuickPdoInteractionAfter hook 
+    
 - 1.17.0 -- 2017-11-20
 
     - add maintenance handling
