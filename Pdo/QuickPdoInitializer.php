@@ -28,6 +28,25 @@ class QuickPdoInitializer
             $c = XConfig::get("Core.quickPdoConfig");
             QuickPdo::setConnection($c['dsn'], $c['user'], $c['pass'], $c['options']);
             QuickPdo::setOnQueryReadyCallback(function ($method, $query, $markers = null, $table = null, array $whereConds = null) {
+
+                if (null === $markers) {
+                    $markers = [];
+                }
+
+                $params = [
+                    'method' => $method,
+                    'query' => $query,
+                    'markers' => $markers,
+                    'table' => $table,
+                    'whereConds' => $whereConds,
+                ];
+                Hooks::call("Core_onQuickPdoQueryReady", $params);
+
+
+            });
+
+
+            QuickPdo::setOnDataAlterAfterCallback(function ($method, $query, $markers = null, $table = null, array $whereConds = null) {
                 if (null === $markers) {
                     $markers = [];
                 }
@@ -43,6 +62,9 @@ class QuickPdoInitializer
 
 
             });
+
+
+
             $this->initialized = true;
         }
     }

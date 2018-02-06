@@ -119,6 +119,10 @@ Others
 History Log
 ------------------
     
+- 1.19.0 -- 2018-02-06
+
+    - enhance WebApplicationHandler.handle method, now creates ApplicationRegistry: isBackoffice variable for sites of type dual 
+    
 - 1.18.0 -- 2018-01-30
 
     - enhance QuickPdoInitializer, now delegates via Core_onQuickPdoInteractionAfter hook 

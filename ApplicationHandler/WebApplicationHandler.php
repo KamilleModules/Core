@@ -13,6 +13,7 @@ use Core\Services\Hooks;
 use Core\Services\X;
 use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Environment\Web\Environment;
+use Kamille\Architecture\Registry\ApplicationRegistry;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
 use Kamille\Mvc\HtmlPageHelper\HtmlPageHelper;
 use Kamille\Services\XConfig;
@@ -186,10 +187,13 @@ class WebApplicationHandler
                 $request->set("siteType", "dual.back");
                 SessionUser::$key = 'backUser';
                 ApplicationParameters::set("theme", XConfig::get("Core.themeBack"));
+                ApplicationRegistry::set("isBackoffice", true);
+
             } else {
                 $request->set("siteType", "dual.front");
                 SessionUser::$key = 'frontUser';
                 ApplicationParameters::set("theme", XConfig::get("Core.themeFront"));
+                ApplicationRegistry::set("isBackoffice", false);
             }
         } else {
             $request->set("siteType", "single");
