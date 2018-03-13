@@ -166,13 +166,7 @@ class WebApplicationHandler
 
         if (true) {
             // assuming xlog was successfully created
-            $perf = Chronos::point("page.perf");
-            $msg = PHP_SAPI . "-";
-            if (array_key_exists("REQUEST_URI", $_SERVER)) {
-                $msg .= $_SERVER['REQUEST_URI'];
-            }
-            $msg .= "--" . number_format($perf[0], 3) . "--" . $perf[1];
-            XLog::log("$msg", "page.perf");
+            A::chronosPoint("page.perf");
         }
     }
 
