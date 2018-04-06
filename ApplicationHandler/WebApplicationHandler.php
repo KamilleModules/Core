@@ -133,12 +133,10 @@ class WebApplicationHandler
                 }))
                 ->addListener(ResponseExecuterListener::create());
 
-
             $app->handleRequest($request);
 
 
         } catch (\Exception $e) {
-
 
             /**
              * @var $oldRequest HttpRequestInterface
