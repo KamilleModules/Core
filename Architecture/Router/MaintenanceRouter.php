@@ -8,6 +8,7 @@ use Kamille\Architecture\ApplicationParameters\ApplicationParameters;
 use Kamille\Architecture\Request\Web\HttpRequestInterface;
 use Kamille\Architecture\Router\Web\WebRouterInterface;
 use Kamille\Services\XConfig;
+use Module\Application\Api\Layer\ApplicationVariablesLayer;
 
 class MaintenanceRouter implements WebRouterInterface
 {
@@ -24,13 +25,12 @@ class MaintenanceRouter implements WebRouterInterface
 
     public function match(HttpRequestInterface $request)
     {
-        if (true === XConfig::get("Core.isInMaintenance") &&
+        $isInMaintenance = (bool)ApplicationVariablesLayer::getVariable("Core_isInMaintenance", XConfig::get("Core.isInMaintenance"));
+        if (true === $isInMaintenance &&
             (
                 "single" === $request->get("siteType") ||
                 "dual.front" === $request->get("siteType")
             )
-
-
         ) {
             return $this->controller;
         }
