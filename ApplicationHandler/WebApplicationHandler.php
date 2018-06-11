@@ -108,7 +108,13 @@ class WebApplicationHandler
                 )
                 ->addListener(ControllerExecuterRequestListener::create()->setControllerRepresentationAdaptorCb(function ($controllerString) {
 
+
+//                    ApplicationRegistry::set("core.controllerString", $controllerString);
                     Hooks::call("Core_Controller_onControllerStringReceived", $controllerString);
+
+
+
+
 
                     $p = explode(':', $controllerString, 2);
                     if (2 === count($p)) {
